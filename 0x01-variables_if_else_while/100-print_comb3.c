@@ -14,7 +14,7 @@ while (k <= '9')
 {
 while (l <= '9')
 {
-if (!(k > l))
+if (!(k > l)|| k == l)
 {
 putchar(k);
 putchar(l);
