@@ -10,7 +10,7 @@ int main(void)
 {
 int k = '0';
 int l = '0';
-while (k <= '8')
+while (k <= '9')
 {
 while (l <= '9')
 {
@@ -18,7 +18,7 @@ if (!(k > l) || k == l)
 {
 putchar(k);
 putchar(l);
-if (k == '8' && l == '9')
+if (k == '9' && l == '9')
 {
 putchar('\n');
 }
