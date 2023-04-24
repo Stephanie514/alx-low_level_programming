@@ -10,11 +10,11 @@ int main(void)
 {
 int k = '0';
 int l = '0';
-while (k <= '9')
+while (k <= '8')
 {
 while (l <= '9')
 {
-if (!(k > l)|| k == l)
+if (!(k > l) || k == l)
 {
 putchar(k);
 putchar(l);
