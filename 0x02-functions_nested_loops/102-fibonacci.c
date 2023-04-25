@@ -16,8 +16,8 @@ for (a = 3; a <= 50; ++a)
 {
 next = b + c;
 printf(", %ld", next);
-b = c;
-c = next;
+c = b;
+b = next;
 }
 printf("\n");
 return (0);
