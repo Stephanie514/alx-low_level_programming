@@ -14,7 +14,7 @@ next = a + b;
 a = b;
 b = next;
 printf("%lu", next);
-if (t < 97)
+if (t < 98)
 printf(", ");
 t++;
 }
