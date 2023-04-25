@@ -9,16 +9,17 @@
 int main(void)
 {
 long int a, b, c, next;
-a = 0;
-b = 1;
-printf("1, 2");
-for (a = 1; a <= 48; ++a)
+a = 1;
+b = 2;
+printf("%ld, %ld", a, b);
+for (int i = 3; i <= 50; i++)
 {
-next = b + c;
+next = a + b;
 printf(", %ld", next);
-c = b;
+a = b;
 b = next;
 }
 printf("\n");
 return (0);
 }
+
