@@ -8,18 +8,22 @@
 
 int main(void)
 {
-long int a, b, c, next;
-a = 1;
-b = 2;
-printf("%ld, %ld", a, b);
-for (int i = 3; i <= 50; i++)
+long int i, j, k, next;
+j = 1;
+k = 2;
+for (i = 1; i <= 50; ++i)
 {
-next = a + b;
-printf(", %ld", next);
-a = b;
-b = next;
+if (j != 20365011074)
+{
+printf("%ld, ", j);
 }
-printf("\n");
+else
+{
+printf("%ld\n", j);
+}
+next = j + k;
+j = k;
+k = next;
+}
 return (0);
 }
-
