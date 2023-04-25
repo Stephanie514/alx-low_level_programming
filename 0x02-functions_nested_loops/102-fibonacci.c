@@ -11,19 +11,14 @@ int main(void)
 long int a, b, c, next;
 a = 1;
 b = 2;
-for (a = 1; a <= 50; ++a)
+printf("%ld, %ld", a, b);
+for (a = 3; a <= 50; ++a)
 {
-if (b != 20365011074)
-{
-printf("%ld, ", b);
-}
-else
-{
-printf("%ld\n", b);
-}
 next = b + c;
+printf(", %ld", next);
 b = c;
 c = next;
 }
+printf("\n");
 return (0);
 }
