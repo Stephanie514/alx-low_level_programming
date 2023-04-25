@@ -9,10 +9,10 @@
 int main(void)
 {
 long int a, b, c, next;
-a = 1;
-b = 2;
-printf("%ld, %ld", a, b);
-for (a = 3; a <= 50; ++a)
+a = 0;
+b = 1;
+printf("1, 2");
+for (a = 1; a <= 48; ++a)
 {
 next = b + c;
 printf(", %ld", next);
