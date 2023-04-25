@@ -7,16 +7,15 @@
 int main(void)
 {
 int t = 0;
-unsigned long int a = 1, b = 2, next = 0;
-printf("%lu, %lu, ", a, b);
+unsigned long int a = 0, b = 1, next = 0;
 
-while (t < 96)
+while (t < 98)
 {
 next = a + b;
 a = b;
 b = next;
 printf("%lu", next);
-if (t < 95)
+if (t < 97)
 printf(", ");
 t++;
 }
