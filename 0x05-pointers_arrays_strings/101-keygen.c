@@ -11,38 +11,23 @@
 
 int main(void)
 {
-char Pass_word[84];
-int Num = 0, sum = 0, ano_half1, ano_half2;
+int password[100];
+int a, sum, b;
+sum = 0;
 srand(time(0));
-while (sum < 2772)
+for (a = 0; a < 100; a++)
 {
-Pass_word[Num] = 3 + rand() % 94;
-sum += Pass_word[Num++];
-}
-Pass_word[Num] = '\0';
-if (sum != 2772)
+password[a] = rand() % 78;
+sum += (password[a] + '0');
+putchar(password[a] + '0');
+if ((2772 - sum)-'0' < 78)
 {
-ano_half1 = (sum - 2772 / 2);
-ano_half2 = (sum - 2772 / 2);
-if ((sum - 2772) % 2 != 0)
-ano_half1++;
-for (Num = 0; Pass_word[Num]; Num++)
-{
-if (Pass_word[Num] >= (33 + ano_half1))
-{
-Pass_word[Num] -= ano_half1;
+b = 2772 - sum - '0';
+sum += b;
+putchar(b + '0');
 break;
 }
 }
-for (Num = 0; Pass_word[Num]; Num++)
-{
-if (Pass_word[Num] >= (33 + ano_half2))
-{
-Pass_word[Num] -= ano_half2;
-break;
-}
-}
-}
-printf("%s", Pass_word);
 return (0);
 }
+
