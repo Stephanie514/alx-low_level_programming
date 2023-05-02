@@ -18,6 +18,7 @@ if (integers_array != (n - 1))
 {
 printf(", ");
 }
+}
 putchar('\n');
 }
-}
+
