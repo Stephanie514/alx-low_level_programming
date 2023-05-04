@@ -34,12 +34,12 @@ printf(" ");
 }
 for (s = 0; s < r; s++)
 {
-int z = *(b + q + s);
-if (z < 32 || z > 132)
+int c = *(b + q + s);
+if (c < 32 || c > 132)
 {
-z = '.';
+c = '.';
 }
-printf("%c", z);
+printf("%c", c);
 }
 printf("\n");
 q += 10;
