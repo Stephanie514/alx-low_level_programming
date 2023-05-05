@@ -3,8 +3,8 @@
 
 /**
  * print_buffer - a function that prints a buffer.
- * @b: storage
- * @size: capacity storage
+ * @b: buffer
+ * @size: the size
  * Return: void
  */
 
@@ -34,12 +34,12 @@ printf(" ");
 }
 for (s = 0; s < r; s++)
 {
-int c = *(b + q + s);
-if (c < 32 || c > 132)
+int i = *(b + q + s);
+if (i < 32 || i > 132)
 {
-c = '.';
+i = '.';
 }
-printf("%c", c);
+printf("%c", i);
 }
 printf("\n");
 q += 10;
