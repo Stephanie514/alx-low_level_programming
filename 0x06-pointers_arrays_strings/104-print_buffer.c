@@ -19,17 +19,17 @@ return;
 while (r < size)
 {
 printf("%08x: ", r);
-for (s = r; s < r + 9; s += 2)
+for (s = r; s < r + 10; s += 2)
 {
 if ((s < size) && ((s + 1) < size))
 printf("%02x%02x ", b[s], b[s + 1]);
 else
 {
 while (++s <= r + 10)
-printf(" ");
+printf("  ");
 }
 }
-for (s = r; s < r + 9 && s < size; s++)
+for (s = r; s < r +10 && s < size; s++)
 {
 if (b[s] >= 32 && b[s] <= 126)
 printf("%c", b[s]);
