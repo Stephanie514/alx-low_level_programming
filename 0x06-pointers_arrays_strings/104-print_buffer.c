@@ -18,18 +18,20 @@ return;
 }
 while (r < size)
 {
+if (r % 10 == 0)
 printf("%08x: ", r);
 for (s = r; s < r + 10; s += 2)
 {
 if ((s < size) && ((s + 1) < size))
-printf("%02x%02x ", b[s], b[s + 1]);
+printf("%02x%02x: ", b[s], b[s + 1]);
 else
 {
 while (++s <= r + 10)
 printf("  ");
+printf("  ");
 }
 }
-for (s = r; s < r +10 && s < size; s++)
+for (s = r; s < r + 10 && s < size; s++)
 {
 if (b[s] >= 32 && b[s] <= 126)
 printf("%c", b[s]);
@@ -40,4 +42,3 @@ printf("\n");
 r += 10;
 }
 }
-
