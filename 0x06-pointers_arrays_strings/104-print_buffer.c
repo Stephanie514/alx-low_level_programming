@@ -3,42 +3,45 @@
 
 /**
  * print_buffer - a function that prints a buffer.
- * @b: buffer
- * @size: the size
+ * @b: storage
+ * @size: capacity storage
  * Return: void
  */
 
 void print_buffer(char *b, int size)
 {
-int r = 0, s;
-if (size < 0)
+int q, r, s;
+q = 0;
+if (size <= 0)
 {
 printf("\n");
 return;
 }
-while (r < size)
+while (q < size)
 {
-if (r % 10 == 0)
-printf("%08x: ", r);
-for (s = r; s < r + 10; s += 2)
+r = size - q < 10 ? size - q : 10;
+printf("%08x: ", q);
+for (s = 0; s < 10; s++)
 {
-if ((s < size) && ((s + 1) < size))
-printf("%02x%02x: ", b[s], b[s + 1]);
+if (s < r)
+printf("%02x", *(b + q + s));
 else
+printf(" ");
+if (s % 2)
 {
-while (++s <= r + 10)
-printf("  ");
-printf("  ");
+printf(" ");
 }
 }
-for (s = r; s < r + 10 && s < size; s++)
+for (s = 0; s < r; s++)
 {
-if (b[s] >= 32 && b[s] <= 126)
-printf("%c", b[s]);
-else
-printf(".");
+int z = *(b + q + s);
+if (z < 32 || z > 126)
+{
+z = '.';
+}
+printf("%c", z);
 }
 printf("\n");
-r += 10;
+q += 10;
 }
 }
