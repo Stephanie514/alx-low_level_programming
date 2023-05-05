@@ -10,38 +10,33 @@
 
 void print_buffer(char *b, int size)
 {
-int q, r, s;
-q = 0;
+int r = 0, s;
 if (size <= 0)
 {
 printf("\n");
 return;
 }
-while (q < size)
+while (r < size)
 {
-r = size - q < 10 ? size - q : 10;
-printf("%08x: ", q);
-for (s = 0; s < 10; s++)
+printf("%08x: ", r);
+for (s = r; s < r + 10; s += 2)
 {
-if (s < r)
-printf("%02x", *(b + q + s));
+if ((s < size) && ((s + 1) < size))
+printf("%02x%02x ", b[s], b[s + 1]);
 else
-printf(" ");
-if (s % 2)
 {
 printf(" ");
 }
 }
-for (s = 0; s < r; s++)
+for (s = r; s < r + 10 && s < size; s++)
 {
-int i = *(b + q + s);
-if (i < 32 || i > 126)
-{
-i = '.';
-}
-printf("%c", i);
+if (b[s] >= 32 && b[s] <= 126)
+printf("%c", b[s]);
+else
+printf(".");
 }
 printf("\n");
-q += 10;
+r += 10;
 }
 }
+
