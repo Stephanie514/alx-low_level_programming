@@ -26,7 +26,7 @@ for (s = 0; s < 10; s++)
 if (s < r)
 printf("%02x", *(b + q + s));
 else
-printf(" ");
+printf("  ");
 if (s % 2)
 {
 printf(" ");
