@@ -13,7 +13,8 @@ int lengthstr = 0;
 if (*s)
 {
 lengthstr++;
-lengthstr = +_strlen_recursion(s + 1); lengthstr++;
+lengthstr = +_strlen_recursion(s + 1);
+lengthstr++;
 }
 return (lengthstr);
 }
