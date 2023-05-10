@@ -3,7 +3,6 @@
 int real_sqrt_recursion(int n, int g);
 /**
  * _sqrt_recursion - function that returns the natural square root of a number.
- * @g: the square root calculated currently
  * @n: square root is calculated for this number
  * Return: the square root calculated
  */
@@ -16,10 +15,9 @@ return (real_sqrt_recursion(n, 0));
 }
 
 /**
- * real_sqrt_recursion - helper function for calculating the square root recursively
- *
+ * real_sqrt_recursion - helper function for calculating the square root
  * @n: square root is calculated for this number
- * @g: the square root calculated currently
+ * @g: iterator
  * Return: the square root calculated
  */
 
