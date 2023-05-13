@@ -4,53 +4,53 @@
 #include <string.h>
 
 /**
-* check_num - check if the string has a digit
-* @str: array str
+* num_test - checks if a digit is present in string
+* @stri: array string
 *
 * Return: Always 0 (Success)
 */
 
-int check_num(char *str)
+int num_test(char *stri)
 {
-unsigned int count;
-count = 0;
-while (count < strlen(str))
+unsigned int tally;
+tally = 0;
+while (tally < strlen(stri))
 {
-if (!isdigit(str[count]))
+if (!isdigit(stri[tally]))
 {
 return (0);
 }
-count++;
+tally++;
 }
 return (1);
 }
 
 /**
-* main - Print the name of the program
-* @argc: Count arguments
+* main - prints program's name
+* @argc: number of arguments
 * @argv: Arguments
 *
 * Return: Always 0 (Success)
 */
 int main(int argc, char *argv[])
 {
-int count;
-int str_to_int;
+int tally;
+int strint;
 int sum = 0;
-count = 1;
-while (count < argc)
+tally = 1;
+while (tally < argc)
 {
-if (check_num(argv[count]))
+if (num_test(argv[tally]))
 {
-str_to_int = atoi(argv[count]);
-sum += str_to_int;
+strint = atoi(argv[tally]);
+sum += strint;
 }
 else
 {
 printf("Error\n");
 return (1);
 }
-count++;
+tally++;
 }
 printf("%d\n", sum);
 return (0);
