@@ -22,7 +22,7 @@ else if (bn == 0)
 {
 bn = 1;
 r++;
-} 
+}
 }
 return (r);
 }
@@ -30,15 +30,16 @@ return (r);
 /**
 * strtow - function that splits a string into words.
 * @str: the string to split
-*       
-* Return: pointer to array of strings or 0 error 
+*
+* Return: pointer to array of strings or 0 error
 */
 
 char **strtow(char *str)
 {
 char **array, *sh;
 int a, b = 0, length = 0, lett, g = 0, beg, fin;
-while (*(str + length)) length++;
+while (*(str + length))
+length++;
 lett = number_string(str);
 if (lett == 0)
 return (NULL);
@@ -51,17 +52,20 @@ if (str[a] == ' ' || str[a] == '\0')
 {
 if (g)
 {
-fin = a; sh = (char *) malloc(sizeof(char) * (g + 1));
+fin = a;
+sh = (char *) malloc(sizeof(char) * (g + 1));
 if (sh == NULL)
 return (NULL);
 while (beg < fin)
 *sh++ = str[beg++];
 *sh = '\0';
-array[b] = sh - g; b++;
+array[b] = sh - g;
+b++;
 g = 0;
 }
 }
-else if (g++ == 0) beg = a;
+else if (g++ == 0)
+beg = a;
 }
 array[b] = NULL;
 return (array);
