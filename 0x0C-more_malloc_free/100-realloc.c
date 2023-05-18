@@ -30,7 +30,7 @@ prev_pointer = ptr;
 if (old_size > new_size)
 {
 for (r = 0; r < new_size; r++)
-pointer[r] =prev_pointer[r];
+pointer[r] = prev_pointer[r];
 }
 if (old_size < new_size)
 {
