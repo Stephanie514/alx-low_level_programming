@@ -1,5 +1,5 @@
 #include "dog.h"
-#include <stdio.>
+#include <stdio.h>
 #include <stdlib.h>
 
 /**
@@ -19,7 +19,7 @@ if (d->age < 0)
 printf("Age: (nil)\n");
 else
 printf("Age: %f\n", d->age);
-(if (d->owner == NULL)
+if (d->owner == NULL)
 printf("Owner: (nil)\n");
 else
 printf("Owner: %s\n", d->owner);
