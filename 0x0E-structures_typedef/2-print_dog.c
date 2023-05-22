@@ -5,6 +5,7 @@
 /**
  * print_dog - this prints a struct dog
  * @d: the struct dog to be printed
+ * Return: If d is NULL print nothing.
  */
 
 void print_dog(struct dog *d)
