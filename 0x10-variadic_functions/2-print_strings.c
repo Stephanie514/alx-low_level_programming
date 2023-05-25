@@ -30,4 +30,5 @@ printf("%s%s", separator, string);
 b++;
 }
 printf("\n");
+va_end(v);
 }
