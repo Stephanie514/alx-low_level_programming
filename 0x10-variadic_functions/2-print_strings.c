@@ -20,7 +20,7 @@ while (b < n)
 {
 string = va_arg(v, char *);
 if (!string)
-string = NULL;
+string = "nil";
 if (!separator)
 printf("%s", string);
 else if (separator && b == 0)
