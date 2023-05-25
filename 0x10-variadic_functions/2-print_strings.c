@@ -14,18 +14,22 @@ unsigned int b;
 char *string;
 va_list v;
 va_start(v, n);
+if (n == 0)
+{
+printf("\n");
+return;
+}
 for (b = 0; b < n; b++)
 {
 string = va_arg(v, char *);
 if (!string)
-string = "nil";
-if (!separator)
-printf("%s", string);
-else if (separator && b == 0)
-printf("%s", string);
-else
+string = "(nil)";
+if (separator != NULL && b != 0)
 printf("%s%s", separator, string);
+else
+printf("%s", string);
 }
 printf("\n");
 va_end(v);
 }
+
