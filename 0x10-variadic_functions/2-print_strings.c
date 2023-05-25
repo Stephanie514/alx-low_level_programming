@@ -15,13 +15,7 @@ unsigned int b;
 char *string;
 va_list v;
 va_start(v, n);
-b = 0;
-if (n == 0)
-{
-printf("\n");
-return;
-}
-while (b < n)
+for (b = 0; b < n; b++)
 {
 string = va_arg(v, char *);
 if (!string)
@@ -32,7 +26,6 @@ else if (separator && b == 0)
 printf("%s", string);
 else
 printf("%s%s", separator, string);
-b++;
 }
 printf("\n");
 va_end(v);
