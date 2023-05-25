@@ -3,9 +3,7 @@
 /**
  * print_all - function that prints anything.
  * @format: list of types of arguments passed to the function
- *
  */
-
 void print_all(const char * const format, ...)
 {
 int y = 0;
@@ -34,7 +32,8 @@ stri = "(nil)";
 printf("%s%s", separator, stri);
 break;
 default:
-break;
+y++;
+continue;
 }
 separator = ", ";
 y++;
