@@ -16,6 +16,11 @@ char *string;
 va_list v;
 va_start(v, n);
 b = 0;
+if (n == 0)
+{
+printf("\n");
+return;
+}
 while (b < n)
 {
 string = va_arg(v, char *);
