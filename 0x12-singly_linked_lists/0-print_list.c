@@ -5,7 +5,7 @@
  * print_list - is the name of the function.
  *
  * @h: is the parameter of the function.pointer to a constant list_t structure
- * Return: it returns the number of elements printed
+ * Return: the number of nodes
  */
 
 size_t print_list(const list_t *h)
