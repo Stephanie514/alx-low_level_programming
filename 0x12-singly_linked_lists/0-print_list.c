@@ -2,18 +2,19 @@
 #include "lists.h"
 
 /**
- * struct list_s - singly linked list
- * @str: string - (malloc'ed string)
- * @len: length of the string
- * @next: points to the next node
+ * print_list - is the name of the function.
+ * size_t - return type of the function.
  *
- * Description: singly linked list node structure
+ * print_list - is the name of the function.
+ * @h: is the parameter of the function.pointer to a constant list_t structure
+ * Return: it returns the number of elements printed
  */
-
 size_t print_list(const list_t *h)
 {
 	size_t num;
+
 	num = 0;
+
 	while (h != NULL)
 	{
 		if (h->str == NULL)
@@ -22,7 +23,7 @@ size_t print_list(const list_t *h)
 		}
 		else
 		{
-			printf("%s\n", h->str);
+			printf("[%u]%s\n", h->len, h->str);
 		}
 		h = h->next;
 		num++;
