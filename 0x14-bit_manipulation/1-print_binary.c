@@ -15,7 +15,7 @@ void print_binary(unsigned long int n)
 	while (a >= 0)
 	{
 		pres = n >> a;
-		if (pres % 2 != 0)
+		if (pres & 1)
 		{
 			_putchar('1');
 			num++;
