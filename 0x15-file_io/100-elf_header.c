@@ -5,18 +5,14 @@
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
-
 void validElf(unsigned char *elf_tab);
 void dispMagic(unsigned char *elf_tab);
 void dispClass(unsigned char *elf_tab);
 void dispData(unsigned char *elf_tab);
 void dispVersion(unsigned char *elf_tab);
 void dispOsabi(unsigned char *elf_tab);
-void disp_abi(unsigned char *elf_tab);
-void disp_type(unsigned int e_type, unsigned char *e_ident);
-void disp_entry(unsigned long int e_entry, unsigned char *e_ident);
-void end_elf(int e);
-
+unsigned char elf_tab[EI_NIDENT];
+ssize_t bytes_read;
 /**
 * validElf - Validates if the file is an ELF file.
 * @elf_tab: A pointer to an array containing the ELF magic numbers.
@@ -25,14 +21,19 @@ void end_elf(int e);
 */
 void validElf(unsigned char *elf_tab)
 {
-if (elf_tab[EI_MAG0] != ELFMAG0 || elf_tab[EI_MAG1] != ELFMAG1 ||
-elf_tab[EI_MAG2] != ELFMAG2 || elf_tab[EI_MAG3] != ELFMAG3)
+int a;
+for (a = 0; a < 4; a++)
+{
+if (elf_tab[a] != 127 &&
+elf_tab[a] != 'E' &&
+elf_tab[a] != 'L' &&
+elf_tab[a] != 'F')
 {
 fprintf(stderr, "Error: Not an ELF file\n");
 exit(98);
 }
 }
-
+}
 /**
 * dispMagic - Prints the magic numbers of the ELF header.
 * @elf_tab: A pointer to an array containing the ELF magic numbers.
@@ -42,17 +43,16 @@ exit(98);
 void dispMagic(unsigned char *elf_tab)
 {
 int a;
-
 printf(" Magic: ");
-for (a = 0; a < EI_NIDENT; a++)
+for (a = 0; a < 4; a++)
 {
 printf("%02x", elf_tab[a]);
-if (a != EI_NIDENT - 1)
+if (a == 3)
+printf("\n");
+else
 printf(" ");
 }
-printf("\n");
 }
-
 /**
 * dispClass - Prints the class of the ELF header.
 * @elf_tab: A pointer to an array containing the ELF class.
@@ -76,7 +76,6 @@ printf("<unknown: %x>\n", elf_tab[EI_CLASS]);
 break;
 }
 }
-
 /**
 * dispData - Prints the data encoding of the ELF header.
 * @elf_tab: A pointer to an array containing the ELF class.
@@ -100,201 +99,102 @@ printf("<unknown: %x>\n", elf_tab[EI_DATA]);
 break;
 }
 }
-
 /**
-* dispVersion - Prints the version of the ELF header.
-* @elf_tab: A pointer to an array containing the ELF version.
+* dispVersion - Display the ELF version information.
+*
+* @elf_tab: The ELF header table.
 */
 void dispVersion(unsigned char *elf_tab)
 {
 printf(" Version: %d", elf_tab[EI_VERSION]);
+switch (elf_tab[EI_VERSION])
+{
+case EV_CURRENT:
+printf(" (current)\n");
+break;
+default:
 printf("\n");
+break;
 }
-
+}
 /**
-* dispOsabi - Prints the OS/ABI of the ELF header.
-* @elf_tab: A pointer to an array containing the ELF OS/ABI.
+* dispOsabi - Display the OS/ABI information of the ELF file.
+*
+* This function takes a pointer to the ELF header table and
+* displays the OS/ABI information contained in the header.
+*
+* @elf_tab: - Pointer to the ELF header table.
 */
 void dispOsabi(unsigned char *elf_tab)
 {
 printf(" OS/ABI: ");
 switch (elf_tab[EI_OSABI])
 {
-case ELFOSABI_SYSV:
+case ELFOSABI_NONE:
 printf("UNIX - System V\n");
 break;
 case ELFOSABI_HPUX:
-printf("HP-UX\n");
+printf("UNIX - HP-UX\n");
 break;
 case ELFOSABI_NETBSD:
-printf("NetBSD\n");
+printf("UNIX - NetBSD\n");
 break;
 case ELFOSABI_LINUX:
-printf("Linux\n");
+printf("UNIX - Linux\n");
 break;
 case ELFOSABI_SOLARIS:
-printf("Sun Solaris\n");
-break;
-case ELFOSABI_AIX:
-printf("IBM AIX\n");
+printf("UNIX - Solaris\n");
 break;
 case ELFOSABI_IRIX:
-printf("SGI Irix\n");
+printf("UNIX - IRIX\n");
 break;
 case ELFOSABI_FREEBSD:
-printf("FreeBSD\n");
-break;
-case ELFOSABI_TRU64:
-printf("Compaq TRU64 UNIX\n");
-break;
-case ELFOSABI_ARM:
-printf("ARM\n");
-break;
-case ELFOSABI_STANDALONE:
-printf("Standalone (embedded) application\n");
+printf("UNIX - FreeBSD\n");
 break;
 default:
 printf("<unknown: %x>\n", elf_tab[EI_OSABI]);
 break;
 }
 }
-
 /**
-* disp_abi - Prints the ABI version of the ELF header.
-* @elf_tab: A pointer to an array containing the ELF ABI version.
+* main - Entry point of the program.
+*
+* This function is the entry point of the program. It takes
+* command-line arguments and processes the ELF file specified
+* as a command-line argument.
+*
+* @argc:  The number of command-line arguments.
+* @argv:  An array of strings containing the command-line arguments.
+*
+* Return: Returns 0 on successful execution, otherwise returns an error code.
 */
-void disp_abi(unsigned char *elf_tab)
+int main(int argc, char *argv[])
 {
-printf(" ABI Version: %d", elf_tab[EI_ABIVERSION]);
-printf("\n");
-}
-
-/**
-* disp_type - Prints the type of the ELF header.
-* @e_type: The type field of the ELF header.
-* @e_ident: A pointer to an array containing the ELF magic numbers.
-*/
-void disp_type(unsigned int e_type, unsigned char *e_ident)
-{
-if (e_ident[EI_CLASS] == ELFCLASS32)
-{
-switch (e_type)
-{
-case ET_NONE:
-printf(" Type: NONE (No file type)\n");
-break;
-case ET_REL:
-printf(" Type: REL (Relocatable file)\n");
-break;
-case ET_EXEC:
-printf(" Type: EXEC (Executable file)\n");
-break;
-case ET_DYN:
-printf(" Type: DYN (Shared object file)\n");
-break;
-case ET_CORE:
-printf(" Type: CORE (Core file)\n");
-break;
-default:
-printf(" Type: <unknown: %x>\n", e_type);
-break;
-}
-}
-else if (e_ident[EI_CLASS] == ELFCLASS64)
-{
-switch (e_type)
-{
-case ET_NONE:
-printf(" Type: NONE (None)\n");
-break;
-case ET_REL:
-printf(" Type: REL (Relocatable)\n");
-break;
-case ET_EXEC:
-printf(" Type: EXEC (Executable)\n");
-break;
-case ET_DYN:
-printf(" Type: DYN (Shared object)\n");
-break;
-case ET_CORE:
-printf(" Type: CORE (Core)\n");
-break;
-default:
-printf(" Type: <unknown: %x>\n", e_type);
-break;
-}
-}
-}
-
-/**
-* disp_entry - Prints the entry point address of the ELF header.
-* @e_entry: The entry field of the ELF header.
-* @e_ident: A pointer to an array containing the ELF magic numbers.
-*/
-void disp_entry(unsigned long int e_entry, unsigned char *e_ident)
-{
-if (e_ident[EI_CLASS] == ELFCLASS32)
-{
-printf(" Entry point address: 0x%x\n", (unsigned int)e_entry);
-}
-else if (e_ident[EI_CLASS] == ELFCLASS64)
-{
-printf(" Entry point address: 0x%lx\n", e_entry);
-}
-}
-
-/**
-* end_elf - Prints the endianness of the ELF header.
-* @e: The endianness value from the ELF header.
-*/
-void end_elf(int e)
-{
-printf(" %s: %s\n", "Endianness", (e == 1) ? "Little endian" : "Big endian");
-}
-
-int main(int argc, char **argv)
-{
-int fd;
 unsigned char elf_tab[EI_NIDENT];
-ssize_t n_read;
-
-if (argc != 2)
+ssize_t bytes_read;
+const char *elf_file = argv[1];
+int file = open(elf_file, O_RDONLY);
+if (argc < 2)
 {
-fprintf(stderr, "Usage: %s <ELF-file>\n", argv[0]);
-exit(98);
+printf("Usage: %s <elf_file>\n", argv[0]);
+exit(1);
 }
-
-fd = open(argv[1], O_RDONLY);
-if (fd == -1)
+file = open(argv[1], O_RDONLY);
+if (file < 0)
 {
-perror("open");
-exit(98);
+perror("Failed to open file");
+exit(1);
 }
-
-n_read = read(fd, elf_tab, EI_NIDENT);
-if (n_read == -1)
+bytes_read = read(file, elf_tab, EI_NIDENT);
+if (bytes_read != EI_NIDENT)
 {
-perror("read");
-exit(98);
+printf("Failed to read ELF header\n");
+exit(1);
 }
-if (n_read != EI_NIDENT)
-{
-fprintf(stderr, "Error: Unable to read ELF header\n");
-exit(98);
-}
-
 validElf(elf_tab);
 dispMagic(elf_tab);
 dispClass(elf_tab);
 dispData(elf_tab);
-dispVersion(elf_tab);
-dispOsabi(elf_tab);
-disp_abi(elf_tab);
-disp_type(((Elf32_Ehdr *)elf_tab)->e_type, elf_tab);
-disp_entry(((Elf32_Ehdr *)elf_tab)->e_entry, elf_tab);
-end_elf(((Elf32_Ehdr *)elf_tab)->e_ident[EI_DATA]);
-
-close(fd);
+close(file);
 return (0);
 }
-
