@@ -175,34 +175,34 @@ break;
 */
 int main(int argc, char *argv[])
 {
-	unsigned char elf_tab[EI_NIDENT];
-	ssize_t bytes_read;
-	const char *elf_file = argv[1];
-	int file = open(elf_file, O_RDONLY);
+        unsigned char elf_tab[EI_NIDENT];
+        ssize_t bytes_read;
+        const char *elf_file = argv[1];
+        int file = open(elf_file, O_RDONLY);
 
-	if (argc < 2)
-	{
-		printf("Usage: %s <elf_file>\n", argv[0]);
-		exit(1);
-	}
-	file = open(argv[1], O_RDONLY);
-	if (file < 0)
-	{
-		perror("Failed to open file");
-		exit(1);
-	}
-	bytes_read = read(file, elf_tab, EI_NIDENT);
-	if (bytes_read != EI_NIDENT)
-	{
-		printf("Failed to read ELF header\n");
-		exit(1);
-	}
+        if (argc < 2)
+        {
+                printf("Usage: %s <elf_file>\n", argv[0]);
+                exit(1);
+        }
+        file = open(argv[1], O_RDONLY);
+        if (file < 0)
+        {
+                perror("Failed to open file");
+                exit(1);
+        }
+        bytes_read = read(file, elf_tab, EI_NIDENT);
+        if (bytes_read != EI_NIDENT)
+        {
+                printf("Failed to read ELF header\n");
+                exit(1);
+        }
 
-	validElf(elf_tab);
-	dispMagic(elf_tab);
-	dispClass(elf_tab);
-	dispData(elf_tab);
+        validElf(elf_tab);
+        dispMagic(elf_tab);
+        dispClass(elf_tab);
+        dispData(elf_tab);
 
-	close(file);
-	return (0);
+        close(file);
+        return (0);
 }
