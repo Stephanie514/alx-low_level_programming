@@ -193,7 +193,7 @@ printf(" ABI Version: %d\n", e_ident[EI_ABIVERSION]);
 /**
  * disp_type - Prints the type of an ELF header.
  * @e_type: The ELF type.
- * 
+ *
  */
 void disp_type(unsigned int e_type)
 {
@@ -301,6 +301,5 @@ disp_entry(elf_header->e_entry, e_ident);
 
 e = close(fd);
 end_elf(e);
-
 return (0);
 }
