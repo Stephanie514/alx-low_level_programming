@@ -19,11 +19,11 @@ void disp_entry(unsigned long int e_entry, unsigned char *e_ident);
 void end_elf(int e);
 
 /**
-* validElf - Validates if the file is an ELF file.
-* @e_ident: A pointer to an array containing the ELF magic numbers.
-*
-* Description: If the file is not an ELF file - exit code 98.
-*/
+ * validElf - Validates if the file is an ELF file.
+ * @e_ident: A pointer to an array containing the ELF magic numbers.
+ *
+ * Description: If the file is not an ELF file - exit code 98.
+ */
 void validElf(unsigned char *e_ident)
 {
 int a;
@@ -35,18 +35,18 @@ e_ident[a] != 'E' &&
 e_ident[a] != 'L' &&
 e_ident[a] != 'F')
 {
-fprintf(stderr, "Error: Not an ELF file\n");
+dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
 exit(98);
 }
 }
 }
 
 /**
-* dispMagic - Prints the magic numbers of the ELF header.
-* @e_ident: A pointer to an array containing the ELF magic numbers.
-*
-* Description: Magic numbers are separated by spaces.
-*/
+ * dispMagic - Prints the magic numbers of the ELF header.
+ * @e_ident: A pointer to an array containing the ELF magic numbers.
+ *
+ * Description: Magic numbers are separated by spaces.
+ */
 void dispMagic(unsigned char *e_ident)
 {
 int a;
@@ -65,9 +65,9 @@ printf(" ");
 }
 
 /**
-* dispClass - Prints the class of the ELF header.
-* @e_ident: A pointer to an array containing the ELF class.
-*/
+ * dispClass - Prints the class of the ELF header.
+ * @e_ident: A pointer to an array containing the ELF class.
+ */
 
 void dispClass(unsigned char *e_ident)
 {
@@ -90,9 +90,9 @@ printf("<unknown: %x>\n", e_ident[EI_CLASS]);
 }
 
 /**
-* dispData - Prints the data encoding of the ELF header.
-* @e_ident: A pointer to an array containing the ELF class.
-*/
+ * dispData - Prints the data encoding of the ELF header.
+ * @e_ident: A pointer to an array containing the ELF class.
+ */
 
 void dispData(unsigned char *e_ident)
 {
@@ -116,10 +116,10 @@ printf("<unknown: %x>\n", e_ident[EI_CLASS]);
 
 
 /**
-* dispVersion - Display the ELF version information.
-*
-* @e_ident: The ELF header table.
-*/
+ * dispVersion - Display the ELF version information.
+ *
+ * @e_ident: The ELF header table.
+ */
 
 void dispVersion(unsigned char *e_ident)
 {
@@ -137,13 +137,13 @@ break;
 }
 }
 /**
-* dispOsabi - Display the OS/ABI information of the ELF file.
-*
-* This function takes a pointer to the ELF header table and
-* displays the OS/ABI information contained in the header.
-*
-* @e_ident: - Pointer to the ELF header table.
-*/
+ * dispOsabi - Display the OS/ABI information of the ELF file.
+ *
+ * This function takes a pointer to the ELF header table and
+ * displays the OS/ABI information contained in the header.
+ *
+ * @e_ident: - Pointer to the ELF header table.
+ */
 
 void dispOsabi(unsigned char *e_ident)
 {
@@ -187,9 +187,9 @@ printf("<unknown: %x>\n", e_ident[EI_OSABI]);
 }
 
 /**
-* disp_abi - Prints the ABI version of the ELF header.
-* @e_ident:  pointer to an array containing the ELF ABI version.
-*/
+ * disp_abi - Prints the ABI version of the ELF header.
+ * @e_ident:  pointer to an array containing the ELF ABI version.
+ */
 
 void disp_abi(unsigned char *e_ident)
 {
@@ -198,10 +198,10 @@ e_ident[EI_ABIVERSION]);
 }
 
 /**
-* disp_type - Prints the type of an ELF header.
-* @e_type: The ELF type.
-* @e_ident: A pointer to an array containing the ELF class.
-*/
+ * disp_type - Prints the type of an ELF header.
+ * @e_type: The ELF type.
+ * @e_ident: A pointer to an array containing the ELF class.
+ */
 
 void disp_type(unsigned int e_type, unsigned char *e_ident)
 
@@ -234,10 +234,10 @@ printf("<unknown: %x>\n", e_type);
 }
 
 /**
-* disp_entry - Prints the entry point of an ELF header.
-* @e_entry: The address of the ELF entry point.
-* @e_ident: A pointer to an array containing the ELF class.
-*/
+ * disp_entry - Prints the entry point of an ELF header.
+ * @e_entry: The address of the ELF entry point.
+ * @e_ident: A pointer to an array containing the ELF class.
+ */
 
 void disp_entry(unsigned long int e_entry, unsigned char *e_ident)
 {
@@ -246,7 +246,7 @@ printf(" Entry point address: ");
 if (e_ident[EI_DATA] == ELFDATA2MSB)
 {
 e_entry = ((e_entry << 8) & 0xFF00FF00) |
-((e_entry >> 8) & 0xFF00FF);
+          ((e_entry >> 8) & 0xFF00FF);
 e_entry = (e_entry << 16) | (e_entry >> 16);
 }
 
@@ -258,11 +258,11 @@ printf("%#lx\n", e_entry);
 }
 
 /**
-* end_elf - Closes an ELF file.
-* @e: The file descriptor of the ELF file.
-*
-* Description: If the file cannot be closed - exit code 98.
-*/
+ * end_elf - Closes an ELF file.
+ * @e: The file descriptor of the ELF file.
+ *
+ * Description: If the file cannot be closed - exit code 98.
+ */
 
 void end_elf(int e)
 {
