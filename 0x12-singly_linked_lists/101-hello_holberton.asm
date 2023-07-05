@@ -19,4 +19,3 @@ main:
     mov eax, 0x60  ; Exit syscall number
     xor edi, edi   ; Exit status 0
     syscall
-
