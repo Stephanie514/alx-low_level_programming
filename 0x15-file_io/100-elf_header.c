@@ -50,7 +50,7 @@ void dispMagic(unsigned char *e_ident)
 {
 int a;
 
-printf(" Magic: ");
+printf("ELF Header:\n  Magic:   ");
 
 for (a = 0; a < EI_NIDENT; a++)
 {
@@ -69,12 +69,12 @@ printf(" ");
  */
 void dispClass(unsigned char *e_ident)
 {
-printf(" Class: ");
+printf("  Class:                             ");
 
 switch (e_ident[EI_CLASS])
 {
 case ELFCLASSNONE:
-printf("none\n");
+printf("ELFCLASSNONE\n");
 break;
 case ELFCLASS32:
 printf("ELF32\n");
@@ -93,12 +93,12 @@ printf("<unknown: %x>\n", e_ident[EI_CLASS]);
  */
 void dispData(unsigned char *e_ident)
 {
-printf(" Data: ");
+printf("  Data:                              ");
 
 switch (e_ident[EI_DATA])
 {
 case ELFDATANONE:
-printf("none\n");
+printf("ELFDATANONE\n");
 break;
 case ELFDATA2LSB:
 printf("2's complement, little endian\n");
@@ -116,10 +116,9 @@ printf("<unknown: %x>\n", e_ident[EI_DATA]);
  *
  * @e_ident: The ELF header table.
  */
-
 void dispVersion(unsigned char *e_ident)
 {
-printf(" Version: %d", e_ident[EI_VERSION]);
+printf("  Version:                           %d", e_ident[EI_VERSION]);
 
 switch (e_ident[EI_VERSION])
 {
@@ -133,16 +132,21 @@ break;
 }
 
 /**
- * dispOsabi - Display the OS/ABI information of the ELF file.
- *
- * This function takes a pointer to the ELF header table and
- * displays the OS/ABI information contained in the header.
- *
- * @e_ident: - Pointer to the ELF header table.
+ * disp_abi - Prints the ABI version of the ELF header.
+ * @e_ident:  pointer to an array containing the ELF ABI version.
+ */
+void disp_abi(unsigned char *e_ident)
+{
+printf("  ABI Version:                       %d\n", e_ident[EI_ABIVERSION]);
+}
+
+/**
+ * dispOsabi - Prints the OS/ABI of the ELF header.
+ * @e_ident: A pointer to an array containing the ELF OS/ABI.
  */
 void dispOsabi(unsigned char *e_ident)
 {
-printf(" OS/ABI: ");
+printf("  OS/ABI:                            ");
 
 switch (e_ident[EI_OSABI])
 {
@@ -182,22 +186,14 @@ printf("<unknown: %x>\n", e_ident[EI_OSABI]);
 }
 
 /**
- * disp_abi - Prints the ABI version of the ELF header.
- * @e_ident:  pointer to an array containing the ELF ABI version.
- */
-void disp_abi(unsigned char *e_ident)
-{
-printf(" ABI Version: %d\n", e_ident[EI_ABIVERSION]);
-}
-
-/**
- * disp_type - Prints the type of an ELF header.
+ * disp_type - Prints the type of the ELF header.
  * @e_type: The ELF type.
  *
  */
 void disp_type(unsigned int e_type)
 {
-printf(" Type: ");
+printf("  Type:                              ");
+
 switch (e_type)
 {
 case ET_NONE:
@@ -221,25 +217,26 @@ printf("<unknown: %x>\n", e_type);
 }
 
 /**
- * disp_entry - Prints the entry point of an ELF header.
- * @e_entry: The address of the ELF entry point.
+ * disp_entry - Prints the entry point address of the ELF header.
+ * @e_entry: The entry point address.
  * @e_ident: A pointer to an array containing the ELF class.
  */
 void disp_entry(unsigned long int e_entry, unsigned char *e_ident)
 {
+printf("  Entry point address:               ");
+
 if (e_ident[EI_DATA] == ELFDATA2MSB)
-printf(" Entry point address: 0x%lx\n", __builtin_bswap64(e_entry));
+printf("0x%lx\n", __builtin_bswap64(e_entry));
 else if (e_ident[EI_DATA] == ELFDATA2LSB)
-printf(" Entry point address: 0x%lx\n", e_entry);
+printf("0x%lx\n", e_entry);
 }
 
 /**
- * end_elf - Closes an ELF file.
- * @e: The file descriptor of the ELF file.
+ * end_elf - Closes the file descriptor.
+ * @e: The return value of the close function.
  *
- * Description: If the file cannot be closed - exit code 98.
+ * Description: If the closing fails - exit code 98.
  */
-
 void end_elf(int e)
 {
 if (e != 0)
@@ -251,14 +248,14 @@ exit(98);
 /**
  * main - Entry point of the program.
  *
- * This function is the entry point of the program. It takes
- * command-line arguments and processes the ELF file specified
- * as a command-line argument.
+ * takes command-line arguments and processes the
+ * ELF file specified as a command-line argument.
  *
  * @ac:  The number of command-line arguments.
  * @av:  An array of strings containing the command-line arguments.
  *
- * Return: Returns 0 on successful execution, otherwise returns an error code.
+ * Return: Returns 0 on successful execution
+ * otherwise returns an error code.
  */
 int main(int ac, char **av)
 {
@@ -303,3 +300,4 @@ e = close(fd);
 end_elf(e);
 return (0);
 }
+
