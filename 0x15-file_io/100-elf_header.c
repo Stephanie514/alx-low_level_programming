@@ -7,12 +7,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 /**
-* magic_ELF - this checks for ELF file.
-* @e_ident: this points to the array of ELF magic numbers.
-*
-* Return: always 0.
-* or exit with ERROR msg, code 98.
-*/
+ * magic_ELF - this checks for ELF file.
+ * @e_ident: this points to the array of ELF magic numbers.
+ *
+ * Return: always 0.
+ * or exit with ERROR msg, code 98.
+ */
 void magic_ELF(unsigned char *e_ident)
 {
 int a;
@@ -29,11 +29,11 @@ exit(98);
 }
 
 /**
-* find_magic_num - function that prints the magic numbers of an ELF_H
-* @e_ident: this one points to the array of ELF magic numbers
-*
-* Return: always 0
-*/
+ * find_magic_num - function that prints the magic numbers of an ELF_H
+ * @e_ident: this one points to the array of ELF magic numbers
+ *
+ * Return: always 0
+ */
 void find_magic_num(unsigned char *e_ident)
 {
 int NUM;
@@ -43,8 +43,7 @@ printf("  Magic:   ");
 for (NUM = 0; NUM < EI_NIDENT; NUM++)
 {
 printf("%02x", e_ident[NUM]);
-
-if (NUM == EI_NIDENT - 1)
+if (EI_NIDENT - 1 == NUM)
 printf("\n");
 else
 printf(" ");
@@ -52,11 +51,11 @@ printf(" ");
 }
 
 /**
-* find_class - Function that prints the identified binary architecture(class) of ELF_H
-* @e_ident: this points to the array of the ELF classes.
-*
-* Return: always 0.
-*/
+ * find_class - prints the identified binary architecture(class) of ELF_H
+ * @e_ident: this points to the array of the ELF classes.
+ *
+ * Return: always 0.
+ */
 void find_class(unsigned char *e_ident)
 {
 printf("  Class: ");
@@ -78,11 +77,11 @@ printf("                            <unknown: %x>\n", e_ident[EI_CLASS]);
 }
 
 /**
-* find_data - function that prints the encoded data of processor in ELF_H (endianness)
-* @e_ident: this points to array of ELF processor data.
-*
-* Return: always 0.
-*/
+ * find_data - prints the encoded data of processor in ELF_H (endianness)
+ * @e_ident: this points to array of ELF processor data.
+ *
+ * Return: always 0.
+ */
 
 void find_data(unsigned char *e_ident)
 {
@@ -105,11 +104,11 @@ printf("                             <unknown: %x>\n", e_ident[EI_CLASS]);
 }
 
 /**
-* find_version - function that prints the version specification in ELF_H
-* @e_ident: points to an array of ELF versions
-*
-* Return: always 0.
-*/
+ * get_version - function that prints the version specification in ELF_H
+ * @e_ident: points to an array of ELF versions
+ *
+ * Return: always 0.
+ */
 void get_version(unsigned char *e_ident)
 {
 printf("  Version:                           %d", e_ident[EI_VERSION]);
@@ -129,11 +128,11 @@ break;
 }
 
 /**
-* find_osabi - function which prints the identified OS/ABI in ELF_H
-* @e_ident: points to an array of ELF OS/ABI identifiers
-*
-* Return: Always 0
-*/
+ * find_osabi - function which prints the identified OS/ABI in ELF_H
+ * @e_ident: points to an array of ELF OS/ABI identifiers
+ *
+ * Return: Always 0
+ */
 void find_osabi(unsigned char *e_ident)
 {
 printf("  OS/ABI:");
@@ -176,23 +175,23 @@ printf("                            <unknown: %x>\n", e_ident[EI_OSABI]);
 }
 
 /**
-* find_abi - function that prints the target ABI version in ELF_H
-* @e_ident: this points to an array of ELF ABI versions
-*
-* Return: Always 0.
-*/
+ * find_abi - function that prints the target ABI version in ELF_H
+ * @e_ident: this points to an array of ELF ABI versions
+ *
+ * Return: Always 0.
+ */
 void find_abi(unsigned char *e_ident)
 {
 printf("  ABI Version:                       %d\n", e_ident[EI_ABIVERSION]);
 }
 
 /**
-* find_type - function which prints the identified type in ELF_H
-* @e_type: this is the ELF type
-* @e_ident: this points to an array of ELF types
-*
-* Return: Always 0.
-*/
+ * get_type - function which prints the identified type in ELF_H
+ * @e_type: this is the ELF type
+ * @e_ident: this points to an array of ELF types
+ *
+ * Return: Always 0.
+ */
 void get_type(unsigned int e_type, unsigned char *e_ident)
 {
 if (e_ident[EI_DATA] == ELFDATA2MSB)
@@ -223,11 +222,11 @@ printf("                             <unknown: %x>\n", e_type);
 }
 
 /**
-* find_entaddress - function that prints the virtual address in ELF_H on entry
-* @e_entry: this is virtual address of the ELF entry point
-* @e_ident: this points to an array of entry options
-*
-* Return: Always 0.
+ * find_entaddress - function that prints the virtual address in ELF_H on entry
+ * @e_entry: this is virtual address of the ELF entry point
+ * @e_ident: this points to an array of entry options
+ *
+ * Return: Always 0.
 */
 void find_entaddress(unsigned long int e_entry, unsigned char *e_ident)
 {
@@ -248,14 +247,14 @@ printf("              %#lx\n", e_entry);
 }
 
 /**
-* main - Main function which displays the information contained in the
-* ELF header at the start of an ELF file.
-* @ac: no. of arguments supplied to the program.
-* @av: this is an array of pointers to the arguments
-*
-* Return: 0(success)
-* or ERROR messages
-*/
+ * main - Main function which displays the information contained in the
+ * ELF header at the start of an ELF file.
+ * @ac: no. of arguments supplied to the program.
+ * @av: this is an array of pointers to the arguments
+ *
+ * Return: 0(success)
+ * or ERROR messages
+ */
 int main(int ac __attribute__((__unused__)), char *av[])
 {
 Elf64_Ehdr *hdrr;
