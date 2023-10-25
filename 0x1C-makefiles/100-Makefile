@@ -1,0 +1,30 @@
+# Makefile for the 'school' program
+
+CC = gcc
+CFLAGS = -Wall -Werror -Wextra -pedantic
+
+SRC = main.c school.c
+OBJ = $(SRC:.c=.o)
+
+NAME = school
+
+all: $(NAME)
+
+$(NAME): m.h $(OBJ)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
+
+clean:
+	-$(RM) *~ $(NAME)
+
+oclean:
+	-$(RM) $(OBJ)
+
+fclean: clean oclean
+
+re: fclean all
+
+.PHONY: all clean oclean fclean re
+
+m.h:
+	@echo "Error: m.h header file is missing."
+	@false
