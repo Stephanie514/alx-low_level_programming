@@ -1,7 +1,12 @@
-#include <stdio.h>
 #include "m.h"
 
-int main() {
-    printf("This is the main program.\n");
-    return 0;
+/**
+ * main - Entry point
+ *
+ * Return: Always 
+ */
+int main(void)
+{
+	printholberton_school();
+	return (EXIT_SUCCESS);
 }
