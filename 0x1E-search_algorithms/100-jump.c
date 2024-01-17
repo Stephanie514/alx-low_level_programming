@@ -20,7 +20,7 @@ for (currentIndex = 0, jumpIndex = stepSize;
 jumpIndex < size && array[jumpIndex] < value;
 currentIndex = jumpIndex, jumpIndex += stepSize)
 {
-printf("Value checked array[%ld] = [%d]\n", jumpIndex, array[jumpIndex]);
+printf("Value checked array[%ld] = [%d]\n", currentIndex, array[currentIndex]);
 }
 
 printf("Value found between indexes [%ld] and [%ld]\n",
